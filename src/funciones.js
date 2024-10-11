@@ -28,15 +28,15 @@ export const GenerarCartaHTML = arr => {
                 >
                   <div class="row">
                     <div class="col-12">
-                      <span>♣</span>
+                      <span class="fw-bold">${arr[1]}</span>
                     </div>
                   </div>
                   <div class="row contenedorNumero">
-                    <div class="col-12">8</div>
+                    <div class="col-12">${arr[0]}</div>
                   </div>
                   <div class="row">
                     <div class="col-12 icono-abajo">
-                      <span>♣</span>
+                      <span class="fw-bold">${arr[1]}</span>
                     </div>
                   </div>
                 </div>
