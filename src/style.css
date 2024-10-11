@@ -1,1 +1,52 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  margin: 1.5%;
+  color: white;
+  background-color: rgb(1, 81, 1);
+}
+
+.btn {
+  width: 100%;
+}
+
+.contenedor-principal {
+  height: 700px;
+}
+
+.reglasjuego {
+  border: solid black 3px;
+  background-color: rgb(0, 67, 0);
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.contenedor-carta {
+  box-shadow: 0 0 0 10px linear-gradient(to right, red, yellow);
+  border: solid black 3px;
+  width: 80%;
+  height: auto;
+}
+
+.icono-abajo {
+  transform: rotate(180deg);
+  display: inline-block;
+}
+
+span {
+  font-size: 40px;
+}
+
+.carta-amontonada {
+  margin-left: -75px;
+  position: relative;
+}
+
+.contenedorNumero {
+  height: 160px;
+  align-content: center;
+  text-align: center;
+  font-size: 140px;
+  font-weight: bold;
+}
