@@ -14,7 +14,7 @@
   </head>
   <body>
     <div class="row align-items-center contenedor-principal">
-      <div class="col-7">
+      <div class="col-12 col-md-8">
         <!-- Contenedor con cartas del jugador y el rival -->
         <div class="ladoizquierdo w-100">
           <!-- Cartas Jugador -->
@@ -22,28 +22,56 @@
             <h1 class="fw-bold">
               Jugador (Tu) <span class="puntuaje-j"> - 0</span>
             </h1>
-            <div class="col-3 carta carta-1"></div>
-            <div class="col-3 carta-amontonada carta carta-2"></div>
-            <div class="col-3 carta-amontonada carta carta-3"></div>
-            <div class="col-3 carta-amontonada carta carta-4"></div>
+            <div class="col-md-3 col-4 carta carta-1">
+              <div class="row">
+                <div class="col-12 contenedor-carta rounded-3 text-danger">
+                  <div class="row">
+                    <div class="col-12">
+                      <span class="fw-bold">o</span>
+                    </div>
+                  </div>
+                  <div class="row contenedorNumero">
+                    <div class="col-12">-</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12 icono-abajo">
+                      <span class="fw-bold">o</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 col-4 carta-amontonada carta carta-2"></div>
+            <div class="col-md-3 col-4 carta-amontonada carta carta-3"></div>
+            <div class="col-md-3 col-4 carta-amontonada carta carta-4"></div>
+            <div class="col-md-3 col-4 carta-amontonada carta carta-5"></div>
           </div>
           <!-- Cartas computadora -->
           <div class="row">
             <h1 class="fw-bold">
               Computadora - Rival <span class="puntuaje-r"> - 0</span>
             </h1>
-            <div class="col-3 computadora-carta-1"></div>
-            <div class="col-3 carta-amontonada carta computadora-carta-2"></div>
-            <div class="col-3 carta-amontonada carta computadora-carta-3"></div>
-            <div class="col-3 carta-amontonada carta computadora-carta-4"></div>
+            <div class="col-md-3 col-4 computadora-carta-1"></div>
+            <div
+              class="col-md-3 col-4 carta-amontonada carta computadora-carta-2"
+            ></div>
+            <div
+              class="col-md-3 col-4 carta-amontonada carta computadora-carta-3"
+            ></div>
+            <div
+              class="col-md-3 col-4 carta-amontonada carta computadora-carta-4"
+            ></div>
+            <div
+              class="col-md-3 col-4 carta-amontonada carta computadora-carta-5"
+            ></div>
           </div>
         </div>
       </div>
       <!-- contenedor con la explicacion y normas del juego -->
-      <div class="col-5">
+      <div class="col-12 col-md-4">
         <div class="reglasjuego w-100 rounded-3 text-center">
           <div class="row">
-            <div class="col-12">
+            <div class="col-12 alerta">
               <p>
                 En esta versión de Blackjack, juegas contra la computadora y tu
                 objetivo es acercarte lo más posible a 21 puntos sin pasarte.
@@ -76,14 +104,14 @@
               </p>
             </div>
           </div>
-          <div class="row">
-            <div class="col-4">
+          <div class="row text-center">
+            <div class="col-6">
               <button class="btn btn-primary btn-pedir">Pedir Carta</button>
             </div>
-            <div class="col-4">
+            <div class="col-6">
               <button class="btn btn-warning btn-parar">Parar</button>
             </div>
-            <div class="col-4">
+            <div class="col-12 mt-3">
               <button class="btn btn-danger btn-reiniciar">
                 Reiniciar Juego
               </button>

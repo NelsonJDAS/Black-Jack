@@ -14,7 +14,11 @@ import {
   ElegirGanador,
   botonParar,
   botonPedir,
-  ConvertirStringANumber
+  ConvertirStringANumber,
+  TurnoComputadora,
+  PuntuajeJugaHTML,
+  PuntuajeRivaHTML,
+  botonReiniciar
 } from "./funciones";
 
 window.onload = function() {
@@ -30,37 +34,46 @@ window.onload = function() {
 
   GenerarCartaHTML(PrimeraCartaRival, `computadora-carta-1`);
   CartasRival.push(`${ConseguirValorCarta(PrimeraCartaRival)}`);
-
-  // constantes con la referencia para html
-  const PuntuajeJugaHTML = document.querySelector(".puntuaje-j"),
-    PuntuajeRivaHTML = document.querySelector(".puntuaje-r");
+  PuntuajeRivaHTML.textContent = `${ConsultarPuntuaje(CartasRival)}`;
 
   // Boton para pedir carta
   botonPedir.addEventListener("click", () => {
     // generamos los valores de las cartas
     let cartaJugador = GenerarValorCarta(valoresCartas, simbolos);
-    let cartaRival = GenerarValorCarta(valoresCartas, simbolos);
 
     // generamos el html de cada carta
     GenerarCartaHTML(cartaJugador, `carta-${NumCartaHtmlJugador}`);
-    GenerarCartaHTML(cartaRival, `computadora-carta-${NumCartaHtmlRival}`);
-
+    //
     // insertamos los valores en un array para consultar el puntuaje
     CartasJugador.push(`${ConseguirValorCarta(cartaJugador)}`);
     console.log(CartasJugador);
-    CartasRival.push(`${ConseguirValorCarta(cartaRival)}`);
+    // CartasRival.push(`${ConseguirValorCarta(cartaRival)}`);
     console.log(CartasRival);
 
     // sumamos uno para que el htlm tome como referencia la carta de al lado
     NumCartaHtmlJugador += 1;
-    NumCartaHtmlRival += 1;
 
     PuntuajeJugaHTML.textContent = `${ConsultarPuntuaje(CartasJugador)}`;
-    PuntuajeRivaHTML.textContent = `${ConsultarPuntuaje(CartasRival)}`;
 
     ElegirGanador(
       ConvertirStringANumber(PuntuajeJugaHTML.textContent),
       ConvertirStringANumber(PuntuajeRivaHTML.textContent)
     );
+  });
+
+  botonParar.addEventListener("click", () => {
+    let cartaRival = GenerarValorCarta(valoresCartas, simbolos);
+
+    GenerarCartaHTML(cartaRival, `computadora-carta-${NumCartaHtmlRival}`);
+
+    CartasRival.push(`${ConseguirValorCarta(cartaRival)}`);
+    TurnoComputadora();
+
+    PuntuajeRivaHTML.textContent = `${ConsultarPuntuaje(CartasRival)}`;
+    NumCartaHtmlRival += 1;
+  });
+
+  botonReiniciar.addEventListener("click", () => {
+    location.reload();
   });
 };

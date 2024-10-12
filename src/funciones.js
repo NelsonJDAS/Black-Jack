@@ -2,7 +2,10 @@ import { arrow } from "@popperjs/core";
 
 export const botonPedir = document.querySelector(".btn-pedir"),
   botonParar = document.querySelector(".btn-parar"),
-  botonReiniciar = document.querySelector(".btn-reiniciar");
+  botonReiniciar = document.querySelector(".btn-reiniciar"),
+  alertaGenerada = document.querySelector(".alerta"),
+  PuntuajeJugaHTML = document.querySelector(".puntuaje-j"),
+  PuntuajeRivaHTML = document.querySelector(".puntuaje-r");
 
 // numero aleatorio
 export const ConvertirStringANumber = string => {
@@ -24,16 +27,24 @@ export const GenerarValorCarta = (valores, simbolos) => {
           `${valorAleatorio}`,
           `${simbolos[NumeroAleatorio(simbolos)]}`
         ])
-      : (carta = [`${valorAleatorio}`, `${valorAleatorio}`]);
+      : (carta = [
+          `${valorAleatorio}`,
+          `${simbolos[NumeroAleatorio(simbolos)]}`
+        ]);
   return carta;
 };
 
 //introducir carta html junto los dos valores de la funcion de generar valor junto a la clase de la carta
 export const GenerarCartaHTML = (ValoresCarta, numcarta) => {
+  const color =
+    ValoresCarta[1] != "♣" && ValoresCarta[1] != "♠"
+      ? "text-danger"
+      : "text-dark";
+
   const carta = document.querySelector(`.${numcarta}`);
   carta.innerHTML = ` <div class="row">
                 <div
-                  class="col-12 contenedor-carta rounded-3 bg-white text-danger"
+                  class="col-12 contenedor-carta rounded-3 bg-white ${color}"
                 >
                   <div class="row">
                     <div class="col-12">
@@ -74,13 +85,54 @@ export const DesactivasBotones = (btnParar, botonPedir) => {
 
 export const ElegirGanador = (puntuajeJugador, puntuajeRival) => {
   if (puntuajeJugador > 21) {
-    alert("Has superado de 21");
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-danger text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">PERDISTES</p>
+                <p>Te pasastes de 21</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  } else if (puntuajeJugador === 21 && puntuajeRival != 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-success text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">BLACKJACK!</p>
+                <p>Tienes mucha suerte</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  } else if (puntuajeRival === 21 && puntuajeJugador != 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-danger text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">PERDISTES</p>
+                <p>No es tu dia, te han sacado blackjack</p>
+              </div>`;
     DesactivasBotones(botonParar, botonPedir);
   } else if (puntuajeRival > 21) {
-    alert("Has ganado la computadora se ha pasado");
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-success text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">GANASTES</p>
+                <p>La maquita se paso de 21</p>
+              </div>`;
     DesactivasBotones(botonParar, botonPedir);
   } else if (puntuajeJugador === 21 && puntuajeRival === 21) {
-    alert("Empate");
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-warning text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">EMPATE</p>
+                <p>Los dos sacaron 21 WOW</p>
+              </div>`;
     DesactivasBotones(botonParar, botonPedir);
   }
 };
@@ -97,3 +149,31 @@ export const ConsultarPuntuaje = arr => {
 
   return puntuaje;
 };
+
+// export const TurnoComputadora = () => {
+//   for (let i = 0; i < 5; i++) {
+//     if (
+//       ConvertirStringANumber(PuntuajeRivaHTML.textContent) >
+//       ConvertirStringANumber(PuntuajeRivaHTML.textContent) && < 21
+//     ) {
+//       alertaGenerada.innerHTML = `
+//       <div
+//                   class="alert alert-warning text-center fw-bold w-100"
+//                   role="alert"
+//                 >
+//                   <p class="fs-3">EMPATE</p>
+//                   <p>Los dos sacaron 21 WOW</p>
+//                 </div>`;
+//       DesactivasBotones(botonParar, botonPedir);
+//     } else if (ConvertirStringANumber(PuntuajeRivaHTML.textContent) > 21) {
+//       alertaGenerada.innerHTML = `
+//       <div
+//                   class="alert alert-warning text-center fw-bold w-100"
+//                   role="alert"
+//                 >
+//                   <p class="fs-3">EMPATE</p>
+//                   <p>Los dos sacaron 21 WOW</p>
+//                 </div>`;
+//     }
+//   }
+// };
