@@ -29,6 +29,7 @@ body {
   border-radius: 10%;
 }
 
+/* responsive moviles */
 @media (min-width: 300px) and (max-width: 580px) {
   .contenedor-carta {
     width: 80%;
@@ -46,6 +47,7 @@ body {
   }
 }
 
+/* responsive laptop o tables  */
 @media (min-width: 760px) and (max-width: 992px) {
   .contenedor-carta {
     width: 50%;
@@ -63,6 +65,7 @@ body {
   }
 }
 
+/* responsive pc */
 @media (min-width: 1500px) {
   .contenedor-carta {
     width: 70%;
@@ -85,11 +88,11 @@ body {
   font-weight: bold;
 }
 
-.ocultar-valores {
-  color: #2f4f30 !important;
-}
-
 .voltear-icono {
   transform: scaleY(-1); /* Flip the text vertically */
   display: inline-block;
+}
+
+.ocultar-valores {
+  color: #2f4f30 !important;
 }

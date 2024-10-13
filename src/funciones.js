@@ -108,46 +108,28 @@ export const ConsultarPuntuaje = arr => {
   let letra = "";
   let puntuaje = 0;
   for (let i = 0; i < arr.length; i++) {
-    let tipo =
-      arr[i] === "A"
-        ? (letra = arr[i] + letra)
-        : (puntuaje += ConvertirStringANumber(arr[i]));
+    if (arr[i] === "A" && puntuaje + 10 <= 21) {
+      puntuaje += 11;
+    } else if (arr[i] === "A" && puntuaje + 10 > 21) {
+      puntuaje += 1;
+    } else {
+      puntuaje += ConvertirStringANumber(arr[i]);
+    }
   }
-
   return puntuaje;
 };
 
 //turno de la computadora que se ejecuta al quedarte con las cartas ya dadas
 
 export const TurnoComputadora = (arrComputadora, PuntuajeJug, PuntuajeRiv) => {
-  if (PuntuajeRiv > PuntuajeJug && PuntuajeRiv <= 21) {
-    alertaGenerada.innerHTML = `
-    <div
-                class="alert alert-danger text-center fw-bold w-100"
-                role="alert"
-              >
-                <p class="fs-3">Perdistes</p>
-                <p>Han sacado mejor puntuaje que tu</p>
-              </div>`;
-    DesactivasBotones();
-  } else if (PuntuajeJug === 21 && PuntuajeRiv === 21) {
+  if (PuntuajeJug === 21 && PuntuajeRiv === 21) {
     alertaGenerada.innerHTML = `
     <div
                 class="alert alert-warning text-center fw-bold w-100"
                 role="alert"
               >
-                <p class="fs-3">Empate</p>
-                <p>Te ha empatado con un blackjack</p>
-              </div>`;
-    DesactivasBotones();
-  } else if (PuntuajeRiv > 21) {
-    alertaGenerada.innerHTML = `
-    <div
-                class="alert alert-success text-center fw-bold w-100"
-                role="alert"
-              >
-                <p class="fs-3">Ganastes</p>
-                <p>La maquina se ha pasado</p>
+                <p class="fs-3"> Empate </p>
+                <p>Por una vez que tienes suerte y te empatan :(</p>
               </div>`;
     DesactivasBotones(botonParar, botonPedir);
   } else if (PuntuajeJug === 21 && PuntuajeRiv > 21) {
@@ -160,14 +142,44 @@ export const TurnoComputadora = (arrComputadora, PuntuajeJug, PuntuajeRiv) => {
                 <p>Has tenido mucha suerte</p>
               </div>`;
     DesactivasBotones(botonParar, botonPedir);
-  } else if (PuntuajeJug === 21 && PuntuajeRiv === 21) {
+  } else if (PuntuajeRiv === 21 && PuntuajeJug < 21) {
     alertaGenerada.innerHTML = `
     <div
-                class="alert alert-warning text-center fw-bold w-100"
+                class="alert alert-danger text-center fw-bold w-100"
                 role="alert"
               >
-                <p class="fs-3"> Empate </p>
-                <p>Por una vez que tienes suerte y te empatan :(</p>
+                <p class="fs-3">Has perdido</p>
+                <p>BlackJack Mala suerte, a veces las maquinas son mejores :(</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  } else if (PuntuajeRiv > PuntuajeJug && PuntuajeRiv <= 21) {
+    alertaGenerada.innerHTML = `
+      <div
+                  class="alert alert-danger text-center fw-bold w-100"
+                  role="alert"
+                >
+                  <p class="fs-3">Perdistes</p>
+                  <p>Ha sacado mejor puntuaje que Tu</p>
+                </div>`;
+    DesactivasBotones();
+  } else if (PuntuajeRiv > 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-success text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">Ganastes</p>
+                <p>La maquina se ha pasado</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  } else if (PuntuajeRiv === PuntuajeJug) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-danger text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">Empate</p>
+                <p>La maquina te ha empatado</p>
               </div>`;
     DesactivasBotones(botonParar, botonPedir);
   }
