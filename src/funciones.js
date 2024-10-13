@@ -1,5 +1,7 @@
 import { arrow } from "@popperjs/core";
 
+//referencias html
+
 export const botonPedir = document.querySelector(".btn-pedir"),
   botonParar = document.querySelector(".btn-parar"),
   botonReiniciar = document.querySelector(".btn-reiniciar"),
@@ -7,11 +9,12 @@ export const botonPedir = document.querySelector(".btn-pedir"),
   PuntuajeJugaHTML = document.querySelector(".puntuaje-j"),
   PuntuajeRivaHTML = document.querySelector(".puntuaje-r");
 
-// numero aleatorio
+// funcion para convertir string a number
 export const ConvertirStringANumber = string => {
   return parseInt(string, 10);
 };
 
+// numero aleatorio
 const NumeroAleatorio = arr => {
   let randomNumber = Math.floor(Math.random() * arr.length);
   return randomNumber;
@@ -34,7 +37,7 @@ export const GenerarValorCarta = (valores, simbolos) => {
   return carta;
 };
 
-//introducir carta html junto los dos valores de la funcion de generar valor junto a la clase de la carta
+//introducir carta html junto los dos valores de la funcion de generar valor junto a la clase que da la referencia html a la carta
 export const GenerarCartaHTML = (ValoresCarta, numcarta) => {
   const color =
     ValoresCarta[1] != "♣" && ValoresCarta[1] != "♠"
@@ -78,12 +81,14 @@ export const ConseguirValorCarta = arr => {
   }
 };
 
-export const DesactivasBotones = (btnParar, botonPedir) => {
-  btnParar.disabled = true;
+// funcion para desactivar los botones menos el de actualizar pagina
+export const DesactivasBotones = () => {
   botonPedir.disabled = true;
+  botonParar.disabled = true;
 };
 
-export const ElegirGanador = (puntuajeJugador, puntuajeRival) => {
+//funcion para ver si el usuario se ha perdido
+export const RestringirPuntuajeUsuario = puntuajeJugador => {
   if (puntuajeJugador > 21) {
     alertaGenerada.innerHTML = `
     <div
@@ -93,49 +98,11 @@ export const ElegirGanador = (puntuajeJugador, puntuajeRival) => {
                 <p class="fs-3">PERDISTES</p>
                 <p>Te pasastes de 21</p>
               </div>`;
-    DesactivasBotones(botonParar, botonPedir);
-  } else if (puntuajeJugador === 21 && puntuajeRival != 21) {
-    alertaGenerada.innerHTML = `
-    <div
-                class="alert alert-success text-center fw-bold w-100"
-                role="alert"
-              >
-                <p class="fs-3">BLACKJACK!</p>
-                <p>Tienes mucha suerte</p>
-              </div>`;
-    DesactivasBotones(botonParar, botonPedir);
-  } else if (puntuajeRival === 21 && puntuajeJugador != 21) {
-    alertaGenerada.innerHTML = `
-    <div
-                class="alert alert-danger text-center fw-bold w-100"
-                role="alert"
-              >
-                <p class="fs-3">PERDISTES</p>
-                <p>No es tu dia, te han sacado blackjack</p>
-              </div>`;
-    DesactivasBotones(botonParar, botonPedir);
-  } else if (puntuajeRival > 21) {
-    alertaGenerada.innerHTML = `
-    <div
-                class="alert alert-success text-center fw-bold w-100"
-                role="alert"
-              >
-                <p class="fs-3">GANASTES</p>
-                <p>La maquita se paso de 21</p>
-              </div>`;
-    DesactivasBotones(botonParar, botonPedir);
-  } else if (puntuajeJugador === 21 && puntuajeRival === 21) {
-    alertaGenerada.innerHTML = `
-    <div
-                class="alert alert-warning text-center fw-bold w-100"
-                role="alert"
-              >
-                <p class="fs-3">EMPATE</p>
-                <p>Los dos sacaron 21 WOW</p>
-              </div>`;
-    DesactivasBotones(botonParar, botonPedir);
+    DesactivasBotones();
   }
 };
+
+// verficar el puntuaje de cada jugador
 
 export const ConsultarPuntuaje = arr => {
   let letra = "";
@@ -150,30 +117,58 @@ export const ConsultarPuntuaje = arr => {
   return puntuaje;
 };
 
-// export const TurnoComputadora = () => {
-//   for (let i = 0; i < 5; i++) {
-//     if (
-//       ConvertirStringANumber(PuntuajeRivaHTML.textContent) >
-//       ConvertirStringANumber(PuntuajeRivaHTML.textContent) && < 21
-//     ) {
-//       alertaGenerada.innerHTML = `
-//       <div
-//                   class="alert alert-warning text-center fw-bold w-100"
-//                   role="alert"
-//                 >
-//                   <p class="fs-3">EMPATE</p>
-//                   <p>Los dos sacaron 21 WOW</p>
-//                 </div>`;
-//       DesactivasBotones(botonParar, botonPedir);
-//     } else if (ConvertirStringANumber(PuntuajeRivaHTML.textContent) > 21) {
-//       alertaGenerada.innerHTML = `
-//       <div
-//                   class="alert alert-warning text-center fw-bold w-100"
-//                   role="alert"
-//                 >
-//                   <p class="fs-3">EMPATE</p>
-//                   <p>Los dos sacaron 21 WOW</p>
-//                 </div>`;
-//     }
-//   }
-// };
+//turno de la computadora que se ejecuta al quedarte con las cartas ya dadas
+
+export const TurnoComputadora = (arrComputadora, PuntuajeJug, PuntuajeRiv) => {
+  if (PuntuajeRiv > PuntuajeJug && PuntuajeRiv <= 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-danger text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">Perdistes</p>
+                <p>Han sacado mejor puntuaje que tu</p>
+              </div>`;
+    DesactivasBotones();
+  } else if (PuntuajeJug === 21 && PuntuajeRiv === 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-warning text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">Empate</p>
+                <p>Te ha empatado con un blackjack</p>
+              </div>`;
+    DesactivasBotones();
+  } else if (PuntuajeRiv > 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-success text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">Ganastes</p>
+                <p>La maquina se ha pasado</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  } else if (PuntuajeJug === 21 && PuntuajeRiv > 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-success text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3">Ganastes con BlackJack!</p>
+                <p>Has tenido mucha suerte</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  } else if (PuntuajeJug === 21 && PuntuajeRiv === 21) {
+    alertaGenerada.innerHTML = `
+    <div
+                class="alert alert-warning text-center fw-bold w-100"
+                role="alert"
+              >
+                <p class="fs-3"> Empate </p>
+                <p>Por una vez que tienes suerte y te empatan :(</p>
+              </div>`;
+    DesactivasBotones(botonParar, botonPedir);
+  }
+};

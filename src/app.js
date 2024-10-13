@@ -10,8 +10,7 @@ import {
   GenerarCartaHTML,
   ConseguirValorCarta,
   ConsultarPuntuaje,
-  DesactivasBotones,
-  ElegirGanador,
+  RestringirPuntuajeUsuario,
   botonParar,
   botonPedir,
   ConvertirStringANumber,
@@ -38,39 +37,50 @@ window.onload = function() {
 
   // Boton para pedir carta
   botonPedir.addEventListener("click", () => {
-    // generamos los valores de las cartas
+    // generamos el valor de la carta
     let cartaJugador = GenerarValorCarta(valoresCartas, simbolos);
 
-    // generamos el html de cada carta
+    // generamos el html de la carta
     GenerarCartaHTML(cartaJugador, `carta-${NumCartaHtmlJugador}`);
     //
     // insertamos los valores en un array para consultar el puntuaje
     CartasJugador.push(`${ConseguirValorCarta(cartaJugador)}`);
-    console.log(CartasJugador);
-    // CartasRival.push(`${ConseguirValorCarta(cartaRival)}`);
-    console.log(CartasRival);
 
     // sumamos uno para que el htlm tome como referencia la carta de al lado
     NumCartaHtmlJugador += 1;
 
     PuntuajeJugaHTML.textContent = `${ConsultarPuntuaje(CartasJugador)}`;
 
-    ElegirGanador(
-      ConvertirStringANumber(PuntuajeJugaHTML.textContent),
-      ConvertirStringANumber(PuntuajeRivaHTML.textContent)
+    // consultamos si hemos ganado o perdido
+    RestringirPuntuajeUsuario(
+      ConvertirStringANumber(PuntuajeJugaHTML.textContent)
     );
   });
 
   botonParar.addEventListener("click", () => {
-    let cartaRival = GenerarValorCarta(valoresCartas, simbolos);
+    //agregamos una condicion para realizar un bucle
+    while (ConsultarPuntuaje(CartasJugador) > ConsultarPuntuaje(CartasRival)) {
+      //creamos la carta
+      let cartaRival = GenerarValorCarta(valoresCartas, simbolos);
 
-    GenerarCartaHTML(cartaRival, `computadora-carta-${NumCartaHtmlRival}`);
+      //generamos el html
+      GenerarCartaHTML(cartaRival, `computadora-carta-${NumCartaHtmlRival}`);
+      CartasRival.push(ConseguirValorCarta(cartaRival));
 
-    CartasRival.push(`${ConseguirValorCarta(cartaRival)}`);
-    TurnoComputadora();
+      // consultamos las condiciones de la computadora
+      TurnoComputadora(
+        CartasRival,
+        ConsultarPuntuaje(CartasJugador),
+        ConsultarPuntuaje(CartasRival)
+      );
 
-    PuntuajeRivaHTML.textContent = `${ConsultarPuntuaje(CartasRival)}`;
-    NumCartaHtmlRival += 1;
+      console.log(
+        ConsultarPuntuaje(CartasRival),
+        ConsultarPuntuaje(CartasJugador)
+      );
+      PuntuajeRivaHTML.textContent = `${ConsultarPuntuaje(CartasRival)}`;
+      NumCartaHtmlRival += 1;
+    }
   });
 
   botonReiniciar.addEventListener("click", () => {

@@ -3,7 +3,7 @@
 body {
   margin: 1.5%;
   color: white;
-  background-color: rgb(1, 81, 1);
+  background-color: #2f4f30;
 }
 
 .btn {
@@ -16,7 +16,7 @@ body {
 
 .reglasjuego {
   border: solid black 3px;
-  background-color: rgb(0, 67, 0);
+  background-color: #264827;
   color: white;
   font-weight: bold;
   padding: 20px;
