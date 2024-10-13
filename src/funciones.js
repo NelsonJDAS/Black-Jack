@@ -47,19 +47,19 @@ export const GenerarCartaHTML = (ValoresCarta, numcarta) => {
   const carta = document.querySelector(`.${numcarta}`);
   carta.innerHTML = ` <div class="row">
                 <div
-                  class="col-12 contenedor-carta rounded-3 bg-white ${color}"
+                  class="col-12 contenedor-carta bg-white ${color}"
                 >
                   <div class="row">
                     <div class="col-12">
-                      <span class="fw-bold">${ValoresCarta[1]}</span>
+                      <span class="fw-bold letras">${ValoresCarta[1]}</span>
                     </div>
                   </div>
                   <div class="row contenedorNumero">
                     <div class="col-12">${ValoresCarta[0]}</div>
                   </div>
                   <div class="row">
-                    <div class="col-12 icono-abajo">
-                      <span class="fw-bold">${ValoresCarta[1]}</span>
+                    <div class="col-12 text-end voltear-icono">
+                      <span class="fw-bold letras m-0">${ValoresCarta[1]}</span>
                     </div>
                   </div>
                 </div>
