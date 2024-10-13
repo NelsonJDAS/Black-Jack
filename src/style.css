@@ -1,1 +1,98 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  margin: 1.5%;
+  color: white;
+  background-color: #2f4f30;
+}
+
+.btn {
+  width: 100%;
+}
+
+.contenedor-principal {
+  height: 700px;
+}
+
+.reglasjuego {
+  border: solid black 3px;
+  background-color: #264827;
+  color: white;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.contenedor-carta {
+  border: solid black 3px;
+  width: 80%;
+  height: auto;
+  border-radius: 10%;
+}
+
+/* responsive moviles */
+@media (min-width: 300px) and (max-width: 580px) {
+  .contenedor-carta {
+    width: 80%;
+  }
+  .letras {
+    font-size: 15px !important;
+  }
+  .contenedorNumero {
+    font-size: 35px !important;
+    height: 40px !important;
+  }
+  .carta-amontonada {
+    margin-left: -35px !important;
+    position: relative;
+  }
+}
+
+/* responsive laptop o tables  */
+@media (min-width: 760px) and (max-width: 992px) {
+  .contenedor-carta {
+    width: 50%;
+  }
+  .letras {
+    font-size: 30px !important;
+  }
+  .contenedorNumero {
+    font-size: 45px !important;
+    height: 80px !important;
+  }
+  .carta-amontonada {
+    margin-left: -160px !important;
+    position: relative;
+  }
+}
+
+/* responsive pc */
+@media (min-width: 1500px) {
+  .contenedor-carta {
+    width: 70%;
+  }
+}
+.letras {
+  font-size: 40px;
+}
+
+.carta-amontonada {
+  margin-left: -135px;
+  position: relative;
+}
+
+.contenedorNumero {
+  height: 160px;
+  align-content: center;
+  text-align: center;
+  font-size: 140px;
+  font-weight: bold;
+}
+
+.voltear-icono {
+  transform: scaleY(-1); /* Flip the text vertically */
+  display: inline-block;
+}
+
+.ocultar-valores {
+  color: #2f4f30 !important;
+}
