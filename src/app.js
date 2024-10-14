@@ -74,10 +74,6 @@ window.onload = function() {
         ConsultarPuntuaje(CartasRival)
       );
 
-      console.log(
-        ConsultarPuntuaje(CartasRival),
-        ConsultarPuntuaje(CartasJugador)
-      );
       PuntuajeRivaHTML.textContent = `${ConsultarPuntuaje(CartasRival)}`;
       NumCartaHtmlRival += 1;
     }
