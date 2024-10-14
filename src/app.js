@@ -59,7 +59,11 @@ window.onload = function() {
 
   botonParar.addEventListener("click", () => {
     //agregamos una condicion para realizar un bucle
-    while (ConsultarPuntuaje(CartasJugador) > ConsultarPuntuaje(CartasRival)) {
+    while (
+      ConsultarPuntuaje(CartasJugador) > ConsultarPuntuaje(CartasRival) ||
+      (ConsultarPuntuaje(CartasJugador) != ConsultarPuntuaje(CartasRival) &&
+        ConsultarPuntuaje(CartasJugador) > ConsultarPuntuaje(CartasRival))
+    ) {
       //creamos la carta
       let cartaRival = GenerarValorCarta(valoresCartas, simbolos);
 
