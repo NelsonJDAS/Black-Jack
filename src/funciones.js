@@ -23,17 +23,8 @@ const NumeroAleatorio = arr => {
 // generar el valor y el simbolo de la carta
 export const GenerarValorCarta = (valores, simbolos) => {
   let valorAleatorio = valores[NumeroAleatorio(valores)];
+  let carta = [`${valorAleatorio}`, `${simbolos[NumeroAleatorio(simbolos)]}`];
 
-  let carta =
-    typeof valorAleatorio === "number"
-      ? (carta = [
-          `${valorAleatorio}`,
-          `${simbolos[NumeroAleatorio(simbolos)]}`
-        ])
-      : (carta = [
-          `${valorAleatorio}`,
-          `${simbolos[NumeroAleatorio(simbolos)]}`
-        ]);
   return carta;
 };
 
@@ -87,7 +78,7 @@ export const DesactivasBotones = () => {
   botonParar.disabled = true;
 };
 
-//funcion para ver si el usuario se ha perdido
+//funcion para ver si el usuario se ha pasado de 21
 export const RestringirPuntuajeUsuario = puntuajeJugador => {
   if (puntuajeJugador > 21) {
     alertaGenerada.innerHTML = `
@@ -105,12 +96,11 @@ export const RestringirPuntuajeUsuario = puntuajeJugador => {
 // verficar el puntuaje de cada jugador
 
 export const ConsultarPuntuaje = arr => {
-  let letra = "";
   let puntuaje = 0;
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === "A" && puntuaje + 10 <= 21) {
+    if (arr[i] === "A" && puntuaje + 11 <= 21) {
       puntuaje += 11;
-    } else if (arr[i] === "A" && puntuaje + 10 > 21) {
+    } else if (arr[i] === "A" && puntuaje + 11 > 21) {
       puntuaje += 1;
     } else {
       puntuaje += ConvertirStringANumber(arr[i]);
