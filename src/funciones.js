@@ -165,7 +165,7 @@ export const TurnoComputadora = (arrComputadora, PuntuajeJug, PuntuajeRiv) => {
   } else if (PuntuajeRiv === PuntuajeJug) {
     alertaGenerada.innerHTML = `
     <div
-                class="alert alert-danger text-center fw-bold w-100"
+                class="alert alert-warning text-center fw-bold w-100"
                 role="alert"
               >
                 <p class="fs-3">Empate</p>
